@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Card Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Memory Card Game</h1>
+        <p>Made by: Gergő Mindszenti | Neptun: LINF0N</p>
+        <button id="theme-toggle">Toggle Theme</button>
+    </header>
+    <main>
+        <div id="name-input-container">
+            <label for="player-name">Player name:</label>
+            <input type="text" id="player-name" placeholder="What can we call you?">
+        </div>
+        <div id="stats-container">
+            <div id="timer">Time: 0 sec</div>
+            <div id="flips">Flips: 0</div>
+        </div>
+        <div id="main-content">
+            <div id="game-board"></div>
+            <section id="results">
+                <h2>Results</h2>
+                <ul id="results-list"></ul>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <button id="help-btn">Help</button>
+        <button id="new-game-btn">New Game</button>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
