@@ -57,7 +57,7 @@ function flipCard() {
     if (flips === 0) startTimer();
 
     this.classList.add('flipped');
-    flipSound.play();
+    flipSound.cloneNode().play();
 
     if (!hasFlippedCard) {
         hasFlippedCard = true;
