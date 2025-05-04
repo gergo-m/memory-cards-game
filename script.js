@@ -213,3 +213,42 @@ themeToggle.addEventListener('click', function() {
 });
 
 window.addEventListener('DOMContentLoaded', updateThemeButton);
+
+
+// ----- Color toggle -----
+const colorToggle = document.getElementById("color-toggle");
+const cardColors = ["blue-cards", "green-cards", "orange-cards", "gray-cards"];
+let colorIndex = 0;
+
+const savedColor = localStorage.getItem("color");
+if (savedColor && cardColors.includes(savedColor)) {
+    document.body.classList.add(savedColor);
+    colorIndex = cardColors.indexOf(savedColor);
+} else {
+    document.body.classList.add(cardColors[0]);
+}
+
+function updateColorButton() {
+    const nextIndex = (colorIndex + 1) % cardColors.length;
+    const names = ["Blue", "Green", "Orange", "Gray"];
+    colorToggle.textContent = `Switch to ${names[nextIndex]} color`
+}
+
+colorToggle.addEventListener("click", function() {
+    document.body.classList.remove(cardColors[colorIndex]);
+    colorIndex = (colorIndex + 1) % cardColors.length;
+    document.body.classList.add(cardColors[colorIndex]);
+    localStorage.setItem("color", cardColors[colorIndex]);
+    updateColorButton();
+});
+
+window.addEventListener('DOMContentLoaded', updateColorButton);
+
+
+// ----- Mouse follow -----
+document.addEventListener("mousemove", (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    document.body.style.setProperty('--cursor-x', `${x}px`);
+    document.body.style.setProperty('--cursor-y', `${y}px`);
+});
