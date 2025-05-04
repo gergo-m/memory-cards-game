@@ -194,6 +194,15 @@ document.getElementById('help-btn').addEventListener('click', () => {
 });
 
 
+// ----- Canvas -----
+const canvas = document.getElementById("header-canvas");
+const ctx = canvas.getContext('2d');
+canvas.width = 300;
+canvas.height = 4;
+ctx.fillStyle = '#1e90ff';
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+
 // ----- Theme toggle -----
 const themeToggle = document.getElementById("theme-toggle");
 let currentTheme = localStorage.getItem('theme')
