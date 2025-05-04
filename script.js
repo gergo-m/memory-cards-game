@@ -110,6 +110,7 @@ function disableCards() {
             }, 500);
         }
         resetBoard();
+        updateProgressBar();
     }, 1100);
 }
 
@@ -136,6 +137,11 @@ function startTimer() {
         secondsElapsed++;
         document.getElementById('timer').textContent = `Time: ${secondsElapsed} sec`;
     }, 1000);
+}
+
+function updateProgressBar() {
+    const progress = (matchedPairs / totalPairs) * 100;
+    document.getElementById("progress-bar").style.width = `${progress}%`;
 }
 
 function stopTimer() {
