@@ -112,6 +112,10 @@ body::before {
     transition: left 0.2s ease-out, top 0.2s ease-out;
 }
 
+body.light-theme::before {
+    background: radial-gradient(circle, rgba(var(--primary-rgb), 0.1) 0%, rgba(var(--primary-rgb), 0) 70%);
+}
+
 /* ----- HEADER ----- */
 header {
     display: flex;
