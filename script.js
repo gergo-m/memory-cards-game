@@ -12,7 +12,7 @@ let timerInterval;
 let secondsElapsed = 0;
 
 let matchedPairs = 0;
-const totalPairs = allSymbols.length;
+let totalPairs = allSymbols.length;
 let flips = 0;
 
 const flipSound = new Audio('assets/sounds/flip.mp3');
@@ -160,6 +160,7 @@ function setupGame() {
     gameBoard.style.setProperty('--grid-cols', gridSize);
 
     const numOfPairs = (gridSize * gridSize) / 2;
+    totalPairs = numOfPairs;
     const symbols = shuffle(allSymbols).slice(0, numOfPairs);
     const cardsArray = [...symbols, ...symbols];
 
@@ -207,14 +208,129 @@ document.getElementById('help-btn').addEventListener('click', () => {
 });
 
 
-// ----- Canvas -----
-const canvas = document.getElementById("header-canvas");
-const ctx = canvas.getContext('2d');
-canvas.width = 300;
-canvas.height = 4;
-ctx.fillStyle = '#1e90ff';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
+// ----- Background canvas ----
+function drawGameBoardBackground() {
+    const gameContainer = document.getElementById('game-container');
+    const canvas = document.getElementById('bg-canvas');
+    const board = document.getElementById('game-board');
+    if (!gameContainer || !canvas || !board) return;
 
+    let skyColor1, skyColor2, celestialColor, cloudColor, groundColor,
+        treeTrunkColor, treeCrownColor;
+
+    const isDark = document.body.classList.contains('dark-theme');
+
+    if (isDark) {
+        skyColor1 = "#23272f";
+        skyColor2 = "#374151";
+        celestialColor = "#f0e9c9";
+        cloudColor = "rgba(180, 200, 255, 0.18)";
+        groundColor = "#495a3c";
+        treeTrunkColor = "#5a3f1b";
+        treeCrownColor = "#274e13";
+    } else {
+        skyColor1 = "#aeefff";
+        skyColor2 = "#e0f7fa";
+        celestialColor = "#ffe066";
+        cloudColor = "rgba(255, 255, 255, 0.8)";
+        groundColor = "#a3d977";
+        treeTrunkColor = "#8d5524";
+        treeCrownColor = "#3e913b";
+    }
+
+    const rect = board.getBoundingClientRect();
+    canvas.width = Math.round(board.offsetWidth * 1.2);
+    canvas.height = Math.round(board.offsetHeight * 1.05);
+
+    const ctx = canvas.getContext('2d');
+
+    const sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    sky.addColorStop(0, skyColor1);
+    sky.addColorStop(1, skyColor2);
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    function drawStars(ctx, width, height, starCount = 100) {
+        ctx.fillStyle = "white";
+        for (let i = 0; i < starCount; i++) {
+            const x = Math.random() * width;
+            const y = Math.random() * (height / 2);
+            const radius = Math.random() + 0.5;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    }
+
+    const celestialX = canvas.width - 60;
+    const celestialY = 60;
+    const celestialRadius = 40;
+
+    if (isDark) {
+        drawStars(ctx, canvas.width, canvas.height, 70);
+
+        ctx.beginPath();
+        ctx.arc(celestialX, celestialY, celestialRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = celestialColor;
+        ctx.fill();
+
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.arc(celestialX + 15, celestialY - 10, celestialRadius * 0.8, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.globalCompositeOperation = "source-over";
+    } else {
+        ctx.beginPath();
+        ctx.arc(celestialX, celestialY, celestialRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = celestialColor;
+        ctx.fill();
+    }
+
+    function drawCloud(x, y, scale) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(scale, scale);
+        ctx.beginPath();
+        ctx.arc(0, 0, 20, Math.PI * 0.5, Math.PI * 1.5);
+        ctx.arc(30, -10, 25, Math.PI, Math.PI * 1.85);
+        ctx.arc(60, 0, 20, Math.PI * 1.37, Math.PI * 0.37, true);
+        ctx.closePath();
+        ctx.fillStyle = cloudColor;
+        ctx.fill();
+        ctx.restore();
+    }
+    drawCloud(60, 60, 1.1);
+    drawCloud(canvas.width * 0.4, 40, 0.8);
+    drawCloud(canvas.width * 0.7, 90, 1.2);
+
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height - 60);
+    ctx.quadraticCurveTo(canvas.width / 2, canvas.height - 20, canvas.width, canvas.height - 60);
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.lineTo(0, canvas.height);
+    ctx.closePath();
+    ctx.fillStyle = groundColor;
+    ctx.fill();
+
+    function drawTree(x, y, trunkH, crownR) {
+        ctx.fillStyle = treeTrunkColor;
+        ctx.fillRect(x - 5, y, 10, trunkH);
+        ctx.beginPath();
+        ctx.arc(x, y, crownR, 0, 2 * Math.PI);
+        ctx.fillStyle = treeCrownColor;
+        ctx.fill();
+    }
+    drawTree(90, canvas.height - 80, 30, 18);
+    drawTree(canvas.width - 100, canvas.height - 90, 36, 22);
+}
+
+function updateBoardBackground() {
+    setTimeout(drawGameBoardBackground, 100);
+}
+window.addEventListener("resize", updateBoardBackground);
+document.getElementById("difficulty").addEventListener("change", updateBoardBackground);
+window.addEventListener("DOMContentLoaded", updateBoardBackground);
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateBoardBackground);
 
 // ----- Theme toggle -----
 const themeToggle = document.getElementById("theme-toggle");
@@ -238,6 +354,7 @@ themeToggle.addEventListener('click', function() {
     }
     localStorage.setItem('theme', currentTheme);
     updateThemeButton()
+    updateBoardBackground();
 });
 
 window.addEventListener('DOMContentLoaded', updateThemeButton);

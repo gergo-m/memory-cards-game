@@ -17,11 +17,11 @@
     </header>
     <main>
         <div id="name-input-container">
-            <label for="player-name">Player name:</label>
+            <label id="player-name-label" for="player-name">Player name:</label>
             <input type="text" id="player-name" placeholder="What can we call you?">
         </div>
         <div id="difficulty-container">
-            <label for="difficulty">Difficulty:</label>
+            <label id="difficulty-label" for="difficulty">Difficulty:</label>
             <select id="difficulty">
                 <option value="4">Easy (4x4)</option>
                 <option value="6">Medium (6x6)</option>
@@ -33,10 +33,11 @@
             <div id="flips">Flips: 0</div>
         </div>
         <div id="main-content">
-            <div id="game-container">
+            <div id="game-container" style="position: relative;">
                 <div id="progress-container">
                     <div id="progress-bar"></div>
                 </div>
+                <canvas id="bg-canvas"></canvas>
                 <div id="game-board"></div>
             </div>
             <section id="results">

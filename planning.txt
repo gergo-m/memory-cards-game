@@ -1,10 +1,10 @@
-- statikus elemek (kép, rajz) -> canvas-al kellene valami csinálni szerintem, nincs más ötletem
-- dinamikus grafikus elemek -> nem tudom, hogy a kártyák ennek számítanak-e, de az is csak 1db, kell még legalább 1
+- statikus elemek (kép, rajz) -> canvas-al kellene valami csinálni szerintem, nincs más ötletem. Mondjuk a hátteret megcsinálni ilyen elemekkel.
+- dinamikus grafikus elemek -> nem tudom, hogy a kártyák ennek számítanak-e, de az is csak 1db, kell még legalább 1, akár mozgó felhők a háttérben.
 - animáció -> ha grafikus elemnek számítanak a kártyák, akkor megvan
 - hangeffektus -> kész
-- felhasználói interakciók -> van egy kattintás kezelés a kártyákra, de még kellene egy egérmozgás, drag and drop, vagy ilyesmi
-- adatbevitel -> végülis meg van valósítva, de lehetne még valamit hozzátenni.
+- felhasználói interakciók -> van egy kattintás kezelés a kártyákra és van a hátteres egérmozgatós effektus, szerintem ezekkel kész
+- adatbevitel -> Van név és difficulty bevitel, illetve színválasztás ha az annak számít... végülis meg van valósítva, de lehetne még valamit hozzátenni.
 - adatok lekérdezése -> ok
-- konfigurációs beállítás -> végülis kész, de lehetne valami nehézségi szint is
-- sútó -> kész végülis
-- készító név és neptun -> kész
+- konfigurációs beállítás -> végülis kész, nehézségi szint is van
+- súgó -> kész végülis
+- készítő név és neptun -> kész
