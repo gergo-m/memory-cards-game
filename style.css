@@ -534,7 +534,7 @@ footer {
 
 /* ----- RESULTS ----- */
 #results {
-    flex: 0 0 300px;
+    flex: 0 0 110px;
     max-width: 350px;
     min-width: 220px;
     width: 100%;
@@ -589,4 +589,10 @@ footer {
 
 #results-list li:last-child {
     border-bottom: none;
+}
+
+#results-list li#no-results-text {
+    font-weight: normal;
+    color: var(--secondary-text-color);
+    font-style: italic;
 }

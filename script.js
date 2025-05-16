@@ -185,6 +185,10 @@ function loadResults() {
     resultsList.innerHTML = '';
     const results = JSON.parse(localStorage.getItem('memoryGameResults')) || [];
 
+    if (results.length === 0) {
+        resultsList.innerHTML = "<li id='no-results-text'>No results yet.</li>"
+    }
+
     results.sort((a, b) => (a.time + a.flips) - (b.time + b.flips));
 
     results.forEach(result => {
