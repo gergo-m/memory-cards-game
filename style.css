@@ -491,6 +491,19 @@ main {
 }
 
 /* ----- BUTTONS ----- */
+#button-container {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+#results-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
 button {
     background-color: var(--primary);
     color: white;
@@ -524,8 +537,8 @@ footer {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(30, 144, 255, 0.10);
     padding: 18px 24px;
-    overflow-y: auto;
     height: fit-content;
+    overflow-y: auto;
 }
 
 #results h2 {
@@ -539,6 +552,8 @@ footer {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-height: 224px;
+    overflow-y: auto;
 }
 
 #results-list li {
