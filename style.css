@@ -237,7 +237,7 @@ main {
     #game-board {
         margin-right: 40px;
     }
-    #results {
+    #results, #button-container {
         margin-left: 100px;
     }
 }
@@ -496,20 +496,25 @@ main {
     justify-content: center;
     gap: 16px;
     width: 100%;
+    max-width: 350px;
 }
 
 #results-buttons-container {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
 }
 
-button {
+#button-container button {
+    flex: 1 1 0;
+    min-width: 0;
     background-color: var(--primary);
     color: white;
     border: none;
     padding: 10px 18px;
-    margin: 60px 10px;
+    margin: 30px 10px;
     border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
@@ -532,13 +537,13 @@ footer {
     flex: 0 0 300px;
     max-width: 350px;
     min-width: 220px;
+    width: 100%;
     margin-top: 30px;
     background: var(--results-bg);
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(30, 144, 255, 0.10);
     padding: 18px 24px;
-    height: fit-content;
-    overflow-y: auto;
+    display: block;
 }
 
 #results h2 {
