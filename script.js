@@ -1,6 +1,8 @@
 const gameBoard = document.getElementById('game-board');
-const cardSymbols = ['🐵', '🐶', '🐺', '🐱', '🐯', '🦊', '🦝', '🐸']
-const cardsArray = [...cardSymbols, ...cardSymbols];
+const allSymbols = [
+    '🐵','🐶','🐺','🐱','🐯','🦊','🦝','🐸','🐭','🐹','🐰','🦁','🐻','🐨','🐼','🐷',
+    '🐮','🐔','🐧','🐦','🐤','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋'
+];
 
 let hasFlippedCard = false;
 let lockBoard = false;
@@ -10,7 +12,7 @@ let timerInterval;
 let secondsElapsed = 0;
 
 let matchedPairs = 0;
-const totalPairs = cardSymbols.length;
+const totalPairs = allSymbols.length;
 let flips = 0;
 
 const flipSound = new Audio('assets/sounds/flip.mp3');
@@ -151,12 +153,23 @@ function stopTimer() {
 function setupGame() {
     gameBoard.innerHTML = '';
     matchedPairs = 0;
+    flips = 0;
+    secondsElapsed = 0;
+    document.getElementById('timer').textContent = 'Time: 0 sec';
+    document.getElementById('flips').textContent = 'Flips: 0';
+    gameBoard.style.setProperty('--grid-cols', gridSize);
+
+    const numOfPairs = (gridSize * gridSize) / 2;
+    const symbols = shuffle(allSymbols).slice(0, numOfPairs);
+    const cardsArray = [...symbols, ...symbols];
+
     const shuffledCards = shuffle(cardsArray.slice());
     shuffledCards.forEach(symbol => {
         const cardElement = createCard(symbol);
         gameBoard.appendChild(cardElement);
     });
     resetBoard();
+    updateProgressBar();
 }
 
 function saveResults(name, time, flips) {
@@ -266,4 +279,13 @@ document.addEventListener("mousemove", (e) => {
     const y = e.clientY;
     document.body.style.setProperty('--cursor-x', `${x}px`);
     document.body.style.setProperty('--cursor-y', `${y}px`);
+});
+
+
+// ----- Difficulty ----
+let gridSize = 4;
+
+document.getElementById("difficulty").addEventListener("change", (e) => {
+    gridSize = parseInt(e.target.value);
+    setupGame();
 });

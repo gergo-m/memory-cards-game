@@ -15,6 +15,7 @@
     --results-line: #e0e0e0;
     --cursor-x: 0px;
     --cursor-y: 0px;
+    --grid-cols: 4;
 }
 
 body.light-theme {
@@ -174,7 +175,7 @@ main {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    gap: 10px;
+    gap: 20px;
 }
 
 #game-container {
@@ -184,7 +185,7 @@ main {
     gap: 5px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1200px) {
     #main-content {
         flex-direction: row;
         align-items: flex-start;
@@ -261,16 +262,22 @@ label[for="player-name"] {
 
 /* ----- GAME BOARD ----- */
 #game-board {
+    flex: 1 1 600px;
     display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-gap: 15px;
-    justify-content: center;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(var(--grid-cols, 4), 1fr);
+    gap: 10px;
+    justify-items: start;
+    margin: 0 auto 20px auto;
+    width: 100%;
 }
 
 .card {
-    width: 100px;
-    height: 140px;
+    width: calc((100vw - (var(--grid-cols, 4) - 1) * 10px) / var(--grid-cols, 4));
+    aspect-ratio: 1 / 1;
+    max-width: 110px;
+    max-height: 110px;
+    min-width: 32px;
+    min-height: 32px;
     border-radius: 10px;
     cursor: pointer;
     position: relative;
@@ -280,6 +287,18 @@ label[for="player-name"] {
         box-shadow 0.2s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
     will-change: transform, box-shadow;
+}
+
+@media (max-width: 600px) {
+    #game-board {
+        gap: 4px;
+        max-width: 100vw;
+    }
+    .card {
+        max-width: 48px;
+        min-width: 28px;
+        font-size: 1.1rem;
+    }
 }
 
 .card:hover {
@@ -392,12 +411,15 @@ footer {
 
 /* ----- RESULTS ----- */
 #results {
+    flex: 0 0 300px;
+    max-width: 350px;
     margin-top: 30px;
     background: var(--results-bg);
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(30, 144, 255, 0.10);
     padding: 18px 24px;
-    max-width: 400px;
+    overflow-y: auto;
+    height: fit-content;
 }
 
 #results h2 {
