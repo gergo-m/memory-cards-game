@@ -254,7 +254,7 @@ function drawGameBoardBackground() {
         ctx.fillStyle = "white";
         for (let i = 0; i < starCount; i++) {
             const x = Math.random() * width;
-            const y = Math.random() * (height / 2);
+            const y = Math.random() * (height - 20);
             const radius = Math.random() + 0.5;
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, 2 * Math.PI);
@@ -274,11 +274,11 @@ function drawGameBoardBackground() {
         ctx.fillStyle = celestialColor;
         ctx.fill();
 
-        ctx.globalCompositeOperation = "destination-out";
         ctx.beginPath();
         ctx.arc(celestialX + 15, celestialY - 10, celestialRadius * 0.8, 0, 2 * Math.PI);
+        ctx.fillStyle = sky;
+        ctx.globalAlpha = 1;
         ctx.fill();
-        ctx.globalCompositeOperation = "source-over";
     } else {
         ctx.beginPath();
         ctx.arc(celestialX, celestialY, celestialRadius, 0, 2 * Math.PI);
