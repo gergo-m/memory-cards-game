@@ -120,11 +120,52 @@ header {
     margin-bottom: 20px;
 }
 
+.corner-logos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: none;
+    z-index: 1000;
+    padding: 12px 16px;
+    box-sizing: border-box;
+}
+
+.corner-logos img {
+    height: 64px;
+    width: auto;
+    max-width: 22vw;
+    pointer-events: auto;
+    border-radius: 10px;
+}
+
+.corner-logos .logo-left {
+    align-self: flex-start;
+}
+
+.corner-logos .logo-right {
+    align-self: flex-start;
+}
+
+@media (max-width: 600px) {
+    .corner-logos img {
+        height: 40px;
+        max-width: 38vw;
+    }
+    .corner-logos {
+        padding: 4px 6px;
+    }
+}
+
 #header-canvas {
-    width: 100%;
+    width: 60vw;
     height: 4px;
     background: linear-gradient(90deg, #1e90ff, #22c55e, #ff9800);
     margin-bottom: 12px;
+    align-self: center;
 }
 
 header h1 {
