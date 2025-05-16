@@ -191,9 +191,13 @@ main {
         flex-direction: row;
         align-items: flex-start;
         justify-content: center;
+        gap: 40px;
     }
     #game-board {
         margin-right: 40px;
+    }
+    #results {
+        margin-left: 100px;
     }
 }
 
@@ -323,17 +327,19 @@ main {
     justify-items: start;
     margin: 0 auto 20px auto;
     width: 100%;
+    max-width: 700px;
+    min-width: 0;
     position: relative;
     z-index: 1;
+    align-items: center;
+    grid-auto-rows: 1fr;
 }
 
 .card {
     width: calc((100vw - (var(--grid-cols, 4) - 1) * 10px) / var(--grid-cols, 4));
     aspect-ratio: 1 / 1;
     max-width: 110px;
-    max-height: 110px;
     min-width: 32px;
-    min-height: 32px;
     border-radius: 10px;
     cursor: pointer;
     position: relative;
@@ -343,6 +349,7 @@ main {
         box-shadow 0.2s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
     will-change: transform, box-shadow;
+    vertical-align: top;
 }
 
 @media (max-width: 600px) {
@@ -447,7 +454,7 @@ button {
     color: white;
     border: none;
     padding: 10px 18px;
-    margin: 0 10px;
+    margin: 60px 10px;
     border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
@@ -469,6 +476,7 @@ footer {
 #results {
     flex: 0 0 300px;
     max-width: 350px;
+    min-width: 220px;
     margin-top: 30px;
     background: var(--results-bg);
     border-radius: 10px;
