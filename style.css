@@ -128,7 +128,7 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 99vw;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -247,6 +247,13 @@ main {
 }
 
 /* ----- NAME INPUT, DIFFICULTY SELECTION ----- */
+#input-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
 #difficulty-container, #name-input-container {
     display: flex;
     align-items: center;
@@ -256,6 +263,7 @@ main {
     border-radius: 8px;
     padding: 8px 16px;
     box-shadow: 0 1px 4px rgba(var(--primary-rgb), 0.07);
+    width: fit-content;
 }
 
 #difficulty-label, #player-name-label {
@@ -300,6 +308,14 @@ main {
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 18px 18px;
+}
+
+@media(max-width: 750px) {
+    #input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
 }
 
 @media (max-width: 500px) {
